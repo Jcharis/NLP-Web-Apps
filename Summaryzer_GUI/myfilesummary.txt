@@ -1,0 +1,10 @@
+We are currently experiencing another gold rush in AI. Billions are being invested in AI startups across every imaginable industry and business function. Google, Amazon, Microsoft and IBM are in a heavyweight fight investing over $20 billion in AI in 2016. Corporates are scrambling to ensure they realise the productivity benefits of AI ahead of their competitors while looking over their shoulders at the startups. China is putting its considerable weight behind AI and the European Union is talking about a $22 billion AI investment as it fears losing ground to China and the US.
+
+AI is everywhere. From the 3.5 billion daily searches on Google to the new Apple iPhone X that uses facial recognition to Amazon Alexa that cutely answers our questions. Media headlines tout the stories of how AI is helping doctors diagnose diseases, banks better assess customer loan risks, farmers predict crop yields, marketers target and retain customers, and manufacturers improve quality control. And there are think tanks dedicated to studying the physical, cyber and political risks of AI.
+
+
+So who will make the money in AI?
+AI and machine learning will become ubiquitous and woven into the fabric of society. But as with any gold rush the question is who will find gold? Will it just be the brave, the few and the large? Or can the snappy upstarts grab their nuggets? Will those providing the picks and shovel make most of the money? And who will hit pay dirt?
+
+So where is the value being created with AI?
+As I started thinking about who was going to make money in AI I ended up with seven questions. Who will make money across the (1) chip makers, (2) platform and infrastructure providers, (3) enabling models and algorithm providers, (4) enterprise solution providers, (5) industry vertical solution providers, (6) corporate users of AI and (7) nations? While there are many ways to skin the cat of the AI landscape, hopefully below provides a useful explanatory framework — a value chain of sorts. The companies noted are representative of larger players in each category but in no way is this list intended to be comprehensive or predictive.
