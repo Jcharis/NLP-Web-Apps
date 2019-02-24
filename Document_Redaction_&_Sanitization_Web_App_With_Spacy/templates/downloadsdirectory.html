@@ -69,32 +69,23 @@
 <br/>
 <br/>
 <br/>
-<div class="container">
-	<p>FileName: {{ filename }}</p>
 
-	
-</div>
 
 <div class="container">
 	<div class="row">
 		<div class="col-md-6">
           <div class="card mb-10 shadow-sm" id="custom_card">
-          	<h4>Original Data</h4>
-          	<p>{{ myfile }}</p>
+          	<h4>Results Directory</h4>
+          	
+  <ul class="list-group">
+    {% for file in files %}
+    <li class="list-group-item list-group-item-action"><a href="{{ file }}">{{ file }}</a></li>
+    {% endfor %}
+</ul>
 			
 		</div>
 	</div>
-	<div class="col-md-6">
-          <div class="card mb-10 shadow-sm" id="custom_card2">
-          	<h4>Result of Data</h4>
-			<p id="p1">{{ result }}</p>
-			
-			<br/>
-			<hr/>
-      <button onclick="copyToClipboard('#p1')" class="btn btn-outline-success">Copy Result</button>
-		
-		</div>
-	</div>
+
 </div>
 	
 

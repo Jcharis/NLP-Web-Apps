@@ -21,8 +21,14 @@
 	padding:10px;
 
 }
+#custom_card2{
+	background-color:#383838;
+	color:#fff;
+	padding:10px;
+
+}
 </style>
-    <script src="main.js"></script>
+  
     <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 <!-- Bootstrap core CSS -->
@@ -44,6 +50,9 @@
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('downloads')}}">Downloads</a>
+      </li>
+       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
       </li>
 
@@ -58,11 +67,11 @@
 <br/>
 <br/>
 
-<div class="jumbotron">
+<div class="jumbotron" style="background:#0686e4;color:#fff">
     <div class="container">
       <h2 class="display-3">Document Redactor</h2>
       <p>Using Spacy's Named Entity Recognition</p>
-      <p><a class="btn btn-outline-primary waves-effect btn-lg" href="/" role="button">Refresh &raquo;</a></p>
+      <p><a class="btn btn-success waves-effect btn-lg" href="/" role="button">Refresh &raquo;</a></p>
     </div>
   </div>
 <br/>
@@ -71,10 +80,16 @@
 	<form method="POST" action="{{ url_for('uploads')}}" enctype=multipart/form-data>
 		<div class="main-section" >
 			<h5>Drag and Drop</h5>
-			<input type="file" name="txt_data" class="file-upload">
+			<input type="file" name="txt_data" class="file-upload" required="true" >
 		</div>
 
 			<br/>
+			 <select class="form-control" name="saveoption">
+			  <option selected>Select Save Option</option>
+			  <option value="no_save">None</option>
+			  <option value="savetotxt">To Txt</option>
+			  
+			</select>
          <button type="submit" class="btn btn-info"><i class="fa fa-database"></i> Submit</button>
 	</form>
 
@@ -86,6 +101,8 @@
 			  <option selected>Select Task</option>
 			  <option value="redact_names">Names</option>
 			  <option value="places">Places</option>
+			  <option value="org">Organization</option>
+			  <option value="date">Dates</option>
 			</select>
 			<br/>
 		<button type="reset" class="btn btn-primary"><i class="fa fa-eraser"></i> Clear</button>
@@ -103,7 +120,7 @@
 		</div>
 	</div>
 	<div class="col-md-6">
-          <div class="card mb-10 shadow-sm" id="custom_card">
+          <div class="card mb-10 shadow-sm" id="custom_card2">
           	<h4>Result of Data</h4>
 			<p>{{ result }}</p>
 			
@@ -123,6 +140,7 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.3/js/mdb.min.js"></script>
 
+<script src="{{ url_for('static', filename='js/main.js')}}"></script>
 <script type="text/javascript">
 	$('.file_upload').file_upload();
 </script>
