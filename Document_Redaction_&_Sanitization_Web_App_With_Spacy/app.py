@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*- 
 from flask import Flask,url_for,render_template,request,send_file,redirect
-from flask_uploads import UploadSet,configure_uploads,ALL,DATA
+from flask_uploads import UploadSet,configure_uploads,ALL,DATA,DOCUMENTS,TEXT
 from werkzeug import secure_filename
+import docx2txt
+import docx
 
 # Other Packages
 import os
@@ -13,11 +16,21 @@ timestr = time.strftime("%Y%m%d-%H%M%S")
 # Initialize App
 app = Flask(__name__)
 # Configuration For Uploads
-files = UploadSet('files',ALL)
+files = UploadSet('files',DOCUMENTS+TEXT)
 app.config['UPLOADED_FILES_DEST'] = 'static/uploadedfiles'
 configure_uploads(app,files)
 
 # Functions to Sanitize and Redact 
+
+
+
+def getText(docfile):
+    doc = docx.Document(docfile)
+    fullText = []
+    for para in doc.paragraphs:
+        fullText.append(para.text)
+    return '\n'.join(fullText)
+
 def sanitize_names(text):
     docx = nlp(text)
     redacted_sentences = []
@@ -99,20 +112,60 @@ def uploads():
 	if request.method == 'POST' and 'txt_data' in request.files:
 		file = request.files['txt_data']
 		choice = request.form['saveoption']
+		filechoice = request.form['fileoption']
 		filename = secure_filename(file.filename)
 		file.save(os.path.join('static/uploadedfiles',filename))
 
-		# Document Redaction Here
-		with open(os.path.join('static/uploadedfiles',filename),'r+') as f:
-			myfile = f.read()
+		#
+		if filechoice == 'docxfile':
+			#with open(os.path.join('static/uploadedfiles',filename),'r+') as f:
+			myfile = docx2txt.process(os.path.join('static/uploadedfiles',filename))
+				#myfile = getText(f)
+			# myfile = getText(os.path.join('static/uploadedfiles',filename))
 			result = sanitize_names(myfile)
-		if choice == 'savetotxt':
-			new_res = writetofile(result)
-			return redirect(url_for('downloads'))
-		elif choice == 'no_save':
-			pass
+			if choice == 'savetotxt':
+				new_res = writetofile(result)
+				return redirect(url_for('downloads'))
+			elif choice == 'no_save':
+				pass
+			else:
+				pass
+		elif filechoice == 'txtfile':
+			with open(os.path.join('static/uploadedfiles',filename),'r+') as f:
+				myfile = f.read()
+				result = sanitize_names(myfile)
+			if choice == 'savetotxt':
+				new_res = writetofile(result)
+				return redirect(url_for('downloads'))
+			elif choice == 'no_save':
+				pass
+			else:
+				pass
 		else:
-			pass
+			with open(os.path.join('static/uploadedfiles',filename),'r+') as f:
+				myfile = f.read()
+				result = sanitize_names(myfile)
+			if choice == 'savetotxt':
+				new_res = writetofile(result)
+				return redirect(url_for('downloads'))
+			elif choice == 'no_save':
+				pass
+			else:
+				pass
+
+
+		# Document Redaction Here
+
+		# with open(os.path.join('static/uploadedfiles',filename),'r+') as f:
+		# 	myfile = f.read()
+		# 	result = sanitize_names(myfile)
+		# if choice == 'savetotxt':
+		# 	new_res = writetofile(result)
+		# 	return redirect(url_for('downloads'))
+		# elif choice == 'no_save':
+		# 	pass
+		# else:
+		# 	pass
 
 		
 
